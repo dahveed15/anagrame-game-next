@@ -84,8 +84,8 @@ export default function Test() {
       <p>{displayName}</p>
       <p>{possibleAnagrams.length === 0 ? "Congrats, you win!" : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="guess" label="guess" value={typedGuess} onChange={handleTypedGuessChange} />
-        <button type="submit">Submit</button>
+        <input type="text" name="guess" label="guess" value={typedGuess} onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
+        <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
         {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       </form>
     </div>
