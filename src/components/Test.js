@@ -22,6 +22,7 @@ export default function Test() {
   const [possibleAnagrams, setPossibleAnagrams] = useState([]);
   const [displayName, setDisplayName] = useState('');
   const [typedGuess, setTypedGuess] = useState('');
+  const [anagramsFound, setAnagramsFound] = useState([]);
 
   //This will be responsible for resetting the game.
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
@@ -55,10 +56,12 @@ export default function Test() {
     const handleSubmit = (e) => {
       e.preventDefault();
 
-      const submittedGuess = typedGuess;
+      //added this to make sure that it finds an anagram if people accidentally type a space after or before what they're guessing
+      const submittedGuess = typedGuess.trim();
 
       if(possibleAnagrams.includes(submittedGuess)) {
-        setPossibleAnagrams(possibleAnagrams.filter(anagram => anagram !== submittedGuess))
+        setAnagramsFound([submittedGuess, ...anagramsFound]);
+        setPossibleAnagrams(possibleAnagrams.filter(anagram => anagram !== submittedGuess));
       }
 
       //clear the text you just typed
@@ -66,7 +69,7 @@ export default function Test() {
     }
 
     const resetGame = () => {
-      // setDisplayName('')
+      setAnagramsFound([]) 
       setNewGame(!newGame);
     };
 
@@ -74,9 +77,6 @@ export default function Test() {
     if(displayName.length === 0) {
       return <h1>Loading...</h1>
     }
-
-    //add displayed anagrams that you've found to make it easier to keep track and think about the ones missing
-    //commit what you have so far to git
 
   return (
     <div>
@@ -88,6 +88,9 @@ export default function Test() {
         <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
         {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       </form>
+      <div>
+        {anagramsFound.map((word, index) => <p key={index}>{word}</p>)}
+      </div>
     </div>
   )
 }
