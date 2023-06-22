@@ -8,7 +8,7 @@ export default function Test() {
     "crate", "cider", "claps", "cruel", "trade", "dates", 
     "edits", "wordy", "reward", "earns", "heart", "times", 
     "three", "share", "shape", "shore", "lapse", "plate", 
-    "steal", "smile", "liter", "pools", "slope", "names", 
+    "steal", "smile", "glide", "pools", "slope", "names", 
     "meats", "timer", "snail", "tenor", "stone", "pedal", 
     "plane", "spear", "strap", "tapes", "slept", "piers", 
     "spine", "point", "ropes", "rinse", "steer", "tires", 
@@ -20,9 +20,10 @@ export default function Test() {
   // const DISPLAY_CANDIDATES = ["crash", "begin"];
 
   const [possibleAnagrams, setPossibleAnagrams] = useState([]);
+  const [anagramsFound, setAnagramsFound] = useState([]);
   const [displayName, setDisplayName] = useState('');
   const [typedGuess, setTypedGuess] = useState('');
-  const [anagramsFound, setAnagramsFound] = useState([]);
+  const [guessRightOrWrongText, setGuessRightOrWrongText] = useState('')
 
   //This will be responsible for resetting the game.
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
@@ -39,6 +40,8 @@ export default function Test() {
         const anagramData = await res.json();
 
         setDisplayName(displayCandidate);
+        setGuessRightOrWrongText('');
+        setAnagramsFound([]);
         setPossibleAnagrams(anagramData.best.filter(word => word !== displayCandidate));
     }
     getAnagramData()
@@ -60,8 +63,13 @@ export default function Test() {
       const submittedGuess = typedGuess.trim();
 
       if(possibleAnagrams.includes(submittedGuess)) {
+        setGuessRightOrWrongText('Nice job, you found an anagram!');
         setAnagramsFound([submittedGuess, ...anagramsFound]);
         setPossibleAnagrams(possibleAnagrams.filter(anagram => anagram !== submittedGuess));
+      } else if(anagramsFound.includes(submittedGuess)) {
+        setGuessRightOrWrongText('You already found this anagram! Try again.')
+      } else  {
+        setGuessRightOrWrongText('Sorry, your guess was not an anagram for this word :(');
       }
 
       //clear the text you just typed
@@ -69,7 +77,6 @@ export default function Test() {
     }
 
     const resetGame = () => {
-      setAnagramsFound([]) 
       setNewGame(!newGame);
     };
 
@@ -83,6 +90,7 @@ export default function Test() {
       <h1>Anagram Game</h1>
       <p>{displayName}</p>
       <p>{possibleAnagrams.length === 0 ? "Congrats, you win!" : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
+      <p>{possibleAnagrams.length === 0 ? "" : guessRightOrWrongText}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="guess" label="guess" value={typedGuess} onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
         <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
