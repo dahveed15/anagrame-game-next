@@ -21,9 +21,10 @@ export default function Test() {
 
   const [possibleAnagrams, setPossibleAnagrams] = useState([]);
   const [anagramsFound, setAnagramsFound] = useState([]);
+  const [incorrectGuesses, setIncorrectGuesses] = useState([]);
   const [displayName, setDisplayName] = useState('');
   const [typedGuess, setTypedGuess] = useState('');
-  const [guessRightOrWrongText, setGuessRightOrWrongText] = useState('')
+  const [guessRightOrWrongText, setGuessRightOrWrongText] = useState('');
 
   //This will be responsible for resetting the game.
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
@@ -42,6 +43,7 @@ export default function Test() {
         setDisplayName(displayCandidate);
         setGuessRightOrWrongText('');
         setAnagramsFound([]);
+        setIncorrectGuesses([]);
         setPossibleAnagrams(anagramData.best.filter(word => word !== displayCandidate));
     }
     getAnagramData()
@@ -67,9 +69,10 @@ export default function Test() {
         setAnagramsFound([submittedGuess, ...anagramsFound]);
         setPossibleAnagrams(possibleAnagrams.filter(anagram => anagram !== submittedGuess));
       } else if(anagramsFound.includes(submittedGuess)) {
-        setGuessRightOrWrongText('You already found this anagram! Try again.')
+        setGuessRightOrWrongText('You already found this anagram! Try again.');
       } else  {
-        setGuessRightOrWrongText('Sorry, your guess was not an anagram for this word :(');
+        setIncorrectGuesses([submittedGuess, ...incorrectGuesses]);
+        setGuessRightOrWrongText(`Sorry, ${submittedGuess} was not an anagram for this word :(`);
       }
 
       //clear the text you just typed
@@ -97,7 +100,20 @@ export default function Test() {
         {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       </form>
       <div>
-        {anagramsFound.map((word, index) => <p key={index}>{word}</p>)}
+        {anagramsFound.length > 0 &&
+        <div>
+          <h2>Anagrams Found:</h2>
+          {anagramsFound.map((word, index) => <p key={index}>{word}</p>)}
+        </div> 
+        }
+      </div>
+      <div>
+        {incorrectGuesses.length > 0 &&
+        <div>
+          <h2>Incorrect Guesses:</h2>
+          {incorrectGuesses.map((word, index) => <p key={index}>{word}</p>)}
+        </div> 
+        }
       </div>
     </div>
   )
