@@ -83,7 +83,7 @@ export default function Test() {
       //clear the text you just typed
       setTypedGuess('');
 
-      setTries(tries + 1);
+      setTries(tries + 1);      
     }
 
     const resetGame = () => {
@@ -100,17 +100,13 @@ export default function Test() {
       <h1>Anagram Game</h1>
       <p>{displayName}</p>
       <p>Tries: {tries}</p>
-      {/* TODO: Bug adding adding extra try before resetting the game. Adding the Play again button on a new form seems to work, but it refreshes page */}
       <p>{possibleAnagrams.length === 0 ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
+      {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       <p>{possibleAnagrams.length === 0 ? "" : guessRightOrWrongText}</p>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="guess" label="guess" value={typedGuess} onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
+        <input type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
         <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
-        {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       </form>
-      {/* <form onSubmit={resetGame}>
-        {possibleAnagrams.length === 0 && <button type="submit">Play Again?</button>}
-      </form> */}
       <div>
         {anagramsFound.length > 0 &&
         <div>
