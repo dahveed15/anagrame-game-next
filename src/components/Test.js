@@ -25,6 +25,7 @@ export default function Test() {
   const [displayName, setDisplayName] = useState('');
   const [typedGuess, setTypedGuess] = useState('');
   const [guessRightOrWrongText, setGuessRightOrWrongText] = useState('');
+  const [tries, setTries] = useState(0);
 
   //This will be responsible for resetting the game.
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
@@ -44,6 +45,7 @@ export default function Test() {
         setGuessRightOrWrongText('');
         setAnagramsFound([]);
         setIncorrectGuesses([]);
+        setTries(0);
         setPossibleAnagrams(anagramData.best.filter(word => word !== displayCandidate));
     }
     getAnagramData()
@@ -68,15 +70,20 @@ export default function Test() {
         setGuessRightOrWrongText('Nice job, you found an anagram!');
         setAnagramsFound([submittedGuess, ...anagramsFound]);
         setPossibleAnagrams(possibleAnagrams.filter(anagram => anagram !== submittedGuess));
+      } else if(submittedGuess === displayName) {
+        setGuessRightOrWrongText(`Sorry, ${displayName} is not a valid guess. You need to guess a new word by rearranging every letter in this word.`);
       } else if(anagramsFound.includes(submittedGuess)) {
         setGuessRightOrWrongText('You already found this anagram! Try again.');
       } else  {
-        setIncorrectGuesses([submittedGuess, ...incorrectGuesses]);
+        //filter out unique words if people type the same incorrect guess multiple times
+        setIncorrectGuesses([...new Set([...incorrectGuesses, submittedGuess])]);
         setGuessRightOrWrongText(`Sorry, ${submittedGuess} was not an anagram for this word :(`);
       }
 
       //clear the text you just typed
       setTypedGuess('');
+
+      setTries(tries + 1);
     }
 
     const resetGame = () => {
@@ -92,13 +99,18 @@ export default function Test() {
     <div>
       <h1>Anagram Game</h1>
       <p>{displayName}</p>
-      <p>{possibleAnagrams.length === 0 ? "Congrats, you win!" : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
+      <p>Tries: {tries}</p>
+      {/* TODO: Bug adding adding extra try before resetting the game. Adding the Play again button on a new form seems to work, but it refreshes page */}
+      <p>{possibleAnagrams.length === 0 ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
       <p>{possibleAnagrams.length === 0 ? "" : guessRightOrWrongText}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="guess" label="guess" value={typedGuess} onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
         <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
         {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
       </form>
+      {/* <form onSubmit={resetGame}>
+        {possibleAnagrams.length === 0 && <button type="submit">Play Again?</button>}
+      </form> */}
       <div>
         {anagramsFound.length > 0 &&
         <div>
