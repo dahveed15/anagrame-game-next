@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { render } from 'react-dom';
 
 export default function Test() {
   const DISPLAY_CANDIDATES = [
@@ -30,6 +31,8 @@ export default function Test() {
   //This will be responsible for resetting the game.
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
   const [newGame, setNewGame] = useState(false);
+
+  const noAnagramsLeft = possibleAnagrams.length === 0; 
 
     useEffect(() => {
 
@@ -90,6 +93,19 @@ export default function Test() {
       setNewGame(!newGame);
     };
 
+    const renderTypedResults = (typedResults, title) => {
+      return (
+        <div>
+          {typedResults.length > 0 &&
+          <div>
+            <h2>{title}</h2>
+            {typedResults.map((word, index) => <p key={index}>{word}</p>)}
+          </div> 
+          }
+      </div>
+      );
+    };
+
     //show loading screen while waiting for the word and its anagrams to get loaded
     if(displayName.length === 0) {
       return <h1>Loading...</h1>
@@ -100,29 +116,15 @@ export default function Test() {
       <h1>Anagram Game</h1>
       <p>{displayName}</p>
       <p>Tries: {tries}</p>
-      <p>{possibleAnagrams.length === 0 ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
-      {possibleAnagrams.length === 0 && <button onClick={resetGame}>Play Again?</button>}
-      <p>{possibleAnagrams.length === 0 ? "" : guessRightOrWrongText}</p>
+      <p>{noAnagramsLeft ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
+      {noAnagramsLeft && <button autoFocus onClick={resetGame}>Play Again?</button>}
+      <p>{noAnagramsLeft ? "" : guessRightOrWrongText}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={possibleAnagrams.length === 0} />
         <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
       </form>
-      <div>
-        {anagramsFound.length > 0 &&
-        <div>
-          <h2>Anagrams Found:</h2>
-          {anagramsFound.map((word, index) => <p key={index}>{word}</p>)}
-        </div> 
-        }
-      </div>
-      <div>
-        {incorrectGuesses.length > 0 &&
-        <div>
-          <h2>Incorrect Guesses:</h2>
-          {incorrectGuesses.map((word, index) => <p key={index}>{word}</p>)}
-        </div> 
-        }
-      </div>
+      {renderTypedResults(anagramsFound, "Anagrams Found:")}
+      {renderTypedResults(incorrectGuesses, "Incorrect Guesses:")}
     </div>
   )
 }
