@@ -3,62 +3,71 @@ import { useState, useEffect } from 'react'
 
 export default function Test() {
 
-  const FOUR_LETTER_WORDS = [
-    "abed", "bate", "tuba", "came", "care", "sale",
-    "name", "wane", "cars", "pass", "laws", "bard",
-    "bats", "grab", "lead", "read", "edit", "mode",
-    "does", "used", "ears", "ates", "elan", "nose",
-    "time", "evil", "wolf", "guns", "goer", "gust",
-    "hose", "shop", "gyro", "hear", "kins", "ires",
-    "lake", "rail", "male", "last", "late", "pale",
-    "slip", "list", "loop", "slot", "tams", "team",
-    "same", "neap", "snap", "sent", "open", "stop",
-    "snow", "spar", "trap", "past", "pets", "wasp",
-    "tire", "west", "wost", "sway", "bear", "deer",
-    "calm", "goat", "aunt", "kiss", "rent", "save"
-  ];
+  const CATEGORIES = {
+    api: {
+      four_letters: [
+        "abed", "bate", "tuba", "came", "care", "sale",
+        "name", "wane", "cars", "pass", "laws", "bard",
+        "bats", "grab", "lead", "read", "edit", "mode",
+        "does", "used", "ears", "ates", "elan", "nose",
+        "time", "evil", "wolf", "guns", "goer", "gust",
+        "hose", "shop", "gyro", "hear", "kins", "ires",
+        "lake", "rail", "male", "last", "late", "pale",
+        "slip", "list", "loop", "slot", "tams", "team",
+        "same", "neap", "snap", "sent", "open", "stop",
+        "snow", "spar", "trap", "past", "pets", "wasp",
+        "tire", "west", "wost", "sway", "bear", "deer",
+        "calm", "goat", "aunt", "kiss", "rent", "save"
+      ],
+      five_letters: [
+        "beast", "races", "alert", "angel", "tacos", "stare", 
+        "baker", "beard", "begin", "elbow", "sober", "space", 
+        "crate", "cider", "claps", "cruel", "trade", "dates", 
+        "edits", "wordy", "olive", "earns", "heart", "times", 
+        "three", "share", "shape", "shore", "lapse", "plate", 
+        "steal", "smile", "glide", "pools", "slope", "names", 
+        "meats", "timer", "snail", "tenor", "stone", "pedal", 
+        "plane", "spear", "strap", "tapes", "slept", "piers", 
+        "spine", "point", "ropes", "rinse", "steer", "tires", 
+        "saint", "verse", "swine", "skate", "taste", "wider",
+        "dealt", "inset", "taper", "lapse", "lamps", "lives" 
+      ],
+      six_letters: [
+        "actors", "remain", "rental", "search", "artist", "asleep",
+        "assert", "barely", "subtle", "cellar", "nectar", "crates",
+        "sector", "danger", "thread", "deigns", "lasted", "desert",
+        "detail", "detour", "diaper", "stride", "padres", "rusted",
+        "earned", "remote", "envied", "listen", "esprit", "forest",
+        "aisled", "mental", "looped", "lemons", "silver", "sparse",
+        "master", "mister", "naiver", "plates", "replay", "points",
+        "rashes", "sering", "recuse", "resort", "street", "ablest",
+        "sedate", "skated", "steals", "tetras", "wither", "reward"
+      ],
+      seven_letters: [
+        "observe", "marines", "trainer", "aligned", "related", "allergy",
+        "staider", "diapers", "nectars", "capitol", "created", "decimal",
+        "threads", "demerit", "nearest", "gleaner", "esprits", "players",
+        "pirates", "protest", "present", "startle", "retails", "painter"
+      ],
+      eight_letters: [
+        "arrogant", "spiracle", "recanted", "counters", "retraced", "resigned",
+        "nameless", "prorated", "presents", "trainers", "thickest", "statement"
+      ],
+      nine_letters: ["education", "casserole", "mastering"]
+    },
+    extras: {
+      //TODO: this will be for 10+ letter anagrams
+    }
+  };
 
-  const FIVE_LETTER_WORDS = [
-    "beast", "races", "alert", "angel", "tacos", "stare", 
-    "baker", "beard", "begin", "elbow", "sober", "space", 
-    "crate", "cider", "claps", "cruel", "trade", "dates", 
-    "edits", "wordy", "olive", "earns", "heart", "times", 
-    "three", "share", "shape", "shore", "lapse", "plate", 
-    "steal", "smile", "glide", "pools", "slope", "names", 
-    "meats", "timer", "snail", "tenor", "stone", "pedal", 
-    "plane", "spear", "strap", "tapes", "slept", "piers", 
-    "spine", "point", "ropes", "rinse", "steer", "tires", 
-    "saint", "verse", "swine", "skate", "taste", "wider",
-    "dealt", "inset", "taper", "lapse", "lamps", "lives" 
-  ];
+  const API_WORD_LIST = Object.values(CATEGORIES.api).flat();
 
-  const SIX_LETTER_WORDS = [
-    "actors", "remain", "rental", "search", "artist", "asleep",
-    "assert", "barely", "subtle", "cellar", "nectar", "crates",
-    "sector", "danger", "thread", "deigns", "lasted", "desert",
-    "detail", "detour", "diaper", "stride", "padres", "rusted",
-    "earned", "remote", "envied", "listen", "esprit", "forest",
-    "aisled", "mental", "looped", "lemons", "silver", "sparse",
-    "master", "mister", "naiver", "plates", "replay", "points",
-    "rashes", "sering", "recuse", "resort", "street", "ablest",
-    "sedate", "skated", "steals", "tetras", "wither", "reward"
-  ];
-
-  const SEVEN_LETTER_WORDS = [
-    "observe", "marines", "trainer", "aligned", "related", "allergy",
-    "staider", "diapers", "nectars", "capitol", "created", "decimal",
-    "threads", "demerit", "nearest", "gleaner", "esprits", "players",
-    "pirates", "protest", "present", "startle", "retails", "painter"
-  ];
-
-  const EIGHT_LETTER_WORDS = [
-    "arrogant", "spiracle", "recanted", "counters", "retraced", "resigned",
-    "nameless", "prorated", "presents", "trainers", "thickest", "statement"
-  ];
-
-  const NINE_LETTER_WORDS = [
-    "education", "casserole", "mastering"
-  ];
+  const shuffleWords = (arr) => {
+      return arr
+              .map(value => ({ value, sort: Math.random() }))
+              .sort((a, b) => a.sort - b.sort)
+              .map(({ value }) => value)
+  };
 
   //small array to test simple things without a lot of anagram candidates
   // const FIVE_LETTER_WORDS = ["crash", "begin"];
@@ -75,12 +84,13 @@ export default function Test() {
   //By adding it as a dependency variable, it will kick off loading up the anagrams for the random word chosen every time "Play Again?" is clicked
   const [newGame, setNewGame] = useState(false);
 
-  const noAnagramsLeft = possibleAnagrams.length === 0; 
+  const noAnagramsLeft = possibleAnagrams.length === 0;
 
     useEffect(() => {
 
       const getAnagramData = async () => {
-        const displayCandidate = FIVE_LETTER_WORDS[Math.floor(Math.random() * FIVE_LETTER_WORDS.length)];
+        const shuffledWordList = shuffleWords(API_WORD_LIST);
+        const displayCandidate = shuffledWordList[Math.floor(Math.random() * shuffledWordList.length)];
         const res = await fetch("http://localhost:3000/api/anagram/", {
           headers: { word: displayCandidate },
         });
