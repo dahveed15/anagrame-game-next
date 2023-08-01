@@ -17,7 +17,10 @@ export default function Test() {
         "same", "neap", "snap", "sent", "open", "stop",
         "snow", "spar", "trap", "past", "pets", "wasp",
         "tire", "west", "wost", "sway", "bear", "deer",
-        "calm", "goat", "aunt", "kiss", "rent", "save"
+        "calm", "goat", "aunt", "kiss", "rent", "save",
+        "case", "each", "cane", "cats", "dads", "daze",
+        "year", "afro", "raga", "sega", "idea", "said",
+        "sail", "raja", "labs", "gala", "lams"
       ],
       five_letters: [
         "beast", "races", "alert", "angel", "tacos", "stare", 
@@ -30,7 +33,11 @@ export default function Test() {
         "plane", "spear", "strap", "tapes", "slept", "piers", 
         "spine", "point", "ropes", "rinse", "steer", "tires", 
         "saint", "verse", "swine", "skate", "taste", "wider",
-        "dealt", "inset", "taper", "lapse", "lamps", "lives" 
+        "dealt", "inset", "taper", "lapse", "lamps", "lives",
+        "crash", "ameba", "abler", "adobe", "abuse", "aches",
+        "dread", "laded", "taped", "named", "adore", "adorn",
+        "agree", "ideas", "ideal", "aimed", "large", "allot",
+        "loyal", "float"
       ],
       six_letters: [
         "actors", "remain", "rental", "search", "artist", "asleep",
@@ -41,22 +48,55 @@ export default function Test() {
         "aisled", "mental", "looped", "lemons", "silver", "sparse",
         "master", "mister", "naiver", "plates", "replay", "points",
         "rashes", "sering", "recuse", "resort", "street", "ablest",
-        "sedate", "skated", "steals", "tetras", "wither", "reward"
+        "sedate", "skated", "steals", "tetras", "wither", "reward",
+        "abides", "aboard", "abodes", "action", "acuter", "dreads",
+        "addles", "adepts", "header", "admits", "soared", "braved",
+        "visaed", "easier", "affair", "failed", "images", "agreed",
+        "agrees", "lassie", "alcove", "slater", "aliens", "aligns",
+        "nailed", "allots", "allows", "allure"
       ],
       seven_letters: [
-        "observe", "marines", "trainer", "aligned", "related", "allergy",
+        "observe", "marines", "trainer", "dealing", "related", "allergy",
         "staider", "diapers", "nectars", "capitol", "created", "decimal",
         "threads", "demerit", "nearest", "gleaner", "esprits", "players",
-        "pirates", "protest", "present", "startle", "retails", "painter"
+        "pirates", "protest", "present", "startle", "retails", "painter",
+        "restful", "abridge", "caracul", "accrues", "acrider", "actions",
+        "casters", "redhead", "hearsed", "married", "misread", "adverts",
+        "arising", "serials", "alcoves", "algeria", "overall", "swallow",
+        "allures"
       ],
       eight_letters: [
         "arrogant", "spiracle", "recanted", "counters", "retraced", "resigned",
-        "nameless", "prorated", "presents", "trainers", "thickest", "statement"
+        "nameless", "prorated", "presents", "trainers", "thickest", "idolatry",
+        "alerting", "harbored", "canoeist", "autocrat", "adjuster", "canvased",
+        "coasting", "ailments", "alarming", "elastics", "allotted"
       ],
-      nine_letters: ["education", "casserole", "mastering"]
+      nine_letters: [
+        "education", "casserole", "mastering", "actuators", "statement", "algorithm",
+        "alignment", "galleries", "allotting"
+      ]
     },
     extras: {
       //TODO: this will be for 10+ letter anagrams
+      ten_letters: {
+        deductions: ["discounted"],
+        harmonicas: ["maraschino"],
+        percussion: ["supersonic"],
+        introduces: ["discounter", "reductions"],
+        compressed: ["decompress"],
+        inactivate: ["vaticinate"],
+        alarmingly: ["marginally"],
+        antagonist: ["stagnation"],
+        coordinate: ["decoration"],
+        indicatory: ["dictionary"],
+        excitation: ["intoxicate"],
+        pleonastic: ["neoplastic"],
+        domination: ["admonition"],
+        algorithms: ["logarithms"],
+      },
+      eleven_letters: {
+        algorithmic: ["logarithmic"]
+      }
     }
   };
 
