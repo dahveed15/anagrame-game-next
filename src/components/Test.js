@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 export default function Test() {
 
@@ -20,7 +20,9 @@ export default function Test() {
         "calm", "goat", "aunt", "kiss", "rent", "save",
         "case", "each", "cane", "cats", "dads", "daze",
         "year", "afro", "raga", "sega", "idea", "said",
-        "sail", "raja", "labs", "gala", "lams"
+        "sail", "raja", "labs", "gala", "lams", "alps",
+        "laos", "maul", "amid", "spam", "tang", "khan",
+        "neat"
       ],
       five_letters: [
         "beast", "races", "alert", "angel", "tacos", "stare", 
@@ -37,7 +39,8 @@ export default function Test() {
         "crash", "ameba", "abler", "adobe", "abuse", "aches",
         "dread", "laded", "taped", "named", "adore", "adorn",
         "agree", "ideas", "ideal", "aimed", "large", "allot",
-        "loyal", "float"
+        "loyal", "float", "talon", "mauls", "blame", "among",
+        "ample", "amply", "range", "tangs", "khans"
       ],
       six_letters: [
         "actors", "remain", "rental", "search", "artist", "asleep",
@@ -53,7 +56,10 @@ export default function Test() {
         "addles", "adepts", "header", "admits", "soared", "braved",
         "visaed", "easier", "affair", "failed", "images", "agreed",
         "agrees", "lassie", "alcove", "slater", "aliens", "aligns",
-        "nailed", "allots", "allows", "allure"
+        "nailed", "allots", "allows", "allure", "altair", "altars",
+        "manual", "lambed", "blames", "medusa", "assume", "angola",
+        "snared", "wander", "cinema", "angels", "angers", "angled",
+        "manila", "nation", "tehran"
       ],
       seven_letters: [
         "observe", "marines", "trainer", "dealing", "related", "allergy",
@@ -63,17 +69,22 @@ export default function Test() {
         "restful", "abridge", "caracul", "accrues", "acrider", "actions",
         "casters", "redhead", "hearsed", "married", "misread", "adverts",
         "arising", "serials", "alcoves", "algeria", "overall", "swallow",
-        "allures"
+        "allures", "blaming", "anytime", "amherst", "peasant", "wanders",
+        "catches", "grandee", "rangier", "annoyed", "nations", "answers",
+        "anteing"
       ],
       eight_letters: [
         "arrogant", "spiracle", "recanted", "counters", "retraced", "resigned",
         "nameless", "prorated", "presents", "trainers", "thickest", "idolatry",
         "alerting", "harbored", "canoeist", "autocrat", "adjuster", "canvased",
-        "coasting", "ailments", "alarming", "elastics", "allotted"
+        "coasting", "ailments", "alarming", "elastics", "allotted", "altitude",
+        "muralist", "atomizer", "peasants", "ancients", "suriname", "angering",
+        "tasering", "antigens", "antigone"
       ],
       nine_letters: [
         "education", "casserole", "mastering", "actuators", "statement", "algorithm",
-        "alignment", "galleries", "allotting"
+        "alignment", "galleries", "allotting", "latitudes", "amortizes", "atomizers",
+        "lancaster", "insinuate", "stationed"
       ]
     },
     extras: {
@@ -93,9 +104,14 @@ export default function Test() {
         pleonastic: ["neoplastic"],
         domination: ["admonition"],
         algorithms: ["logarithms"],
+        ancestries: ["resistance"]
       },
       eleven_letters: {
-        algorithmic: ["logarithmic"]
+        algorithmic: ["logarithmic"],
+        theologians: ["anthologies"]
+      },
+      thirteen_letters: {
+        antiparticles: ["paternalistic"]
       }
     }
   };
@@ -203,10 +219,10 @@ export default function Test() {
     if(displayName.length === 0) {
       return <h1>Loading...</h1>
     }
-
+//potentially add height: 100% to allow centering
   return (
     <div>
-      <h1>Anagram Game</h1>
+      <h1>Rustic Citrus</h1>
       <p>{displayName}</p>
       <p>Tries: {tries}</p>
       <p>{noAnagramsLeft ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
