@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
+import styles from './Test.module.css';
 
 export default function Test() {
 
@@ -40,7 +41,7 @@ export default function Test() {
         "dread", "laded", "taped", "named", "adore", "adorn",
         "agree", "ideas", "ideal", "aimed", "large", "allot",
         "loyal", "float", "talon", "mauls", "blame", "among",
-        "ample", "amply", "range", "tangs", "khans"
+        "ample", "amply", "range", "tangs", "khans", "baser"
       ],
       six_letters: [
         "actors", "remain", "rental", "search", "artist", "asleep",
@@ -217,23 +218,29 @@ export default function Test() {
 
     //show loading screen while waiting for the word and its anagrams to get loaded
     if(displayName.length === 0) {
-      return <h1>Loading...</h1>
+      return (
+        <div className={styles.black}>
+          <h1>Loading...</h1>
+        </div>
+      )
     }
 //potentially add height: 100% to allow centering
   return (
-    <div>
-      <h1>Rustic Citrus</h1>
-      <p>{displayName}</p>
-      <p>Tries: {tries}</p>
-      <p>{noAnagramsLeft ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
-      {noAnagramsLeft && <button autoFocus onClick={resetGame}>Play Again?</button>}
-      <p>{noAnagramsLeft ? "" : guessRightOrWrongText}</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={noAnagramsLeft} />
-        <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
-      </form>
-      {renderTypedResults(anagramsFound, "Anagrams Found:")}
-      {renderTypedResults(incorrectGuesses, "Incorrect Guesses:")}
+    <div className={styles.black}>
+      <div className={styles.formInner}>
+        {/* <h1>Rustic Citrus</h1> */}
+        <h1>{displayName}</h1>
+        <p>Tries: {tries}</p>
+        <p>{noAnagramsLeft ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
+        {noAnagramsLeft && <button autoFocus onClick={resetGame}>Play Again?</button>}
+        <p>{noAnagramsLeft ? "" : guessRightOrWrongText}</p>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={noAnagramsLeft} />
+          <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
+        </form>
+        {renderTypedResults(anagramsFound, "Anagrams Found:")}
+        {renderTypedResults(incorrectGuesses, "Incorrect Guesses:")}
+      </div>
     </div>
   )
 }

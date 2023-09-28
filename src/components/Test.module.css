@@ -1,0 +1,15 @@
+.black {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #17202A;
+  color: white;
+}
+
+.formInner {
+  padding-bottom: 250px;
+  max-width: 300px;
+  word-wrap: break-word;
+}
