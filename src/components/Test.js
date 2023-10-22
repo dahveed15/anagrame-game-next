@@ -41,13 +41,14 @@ export default function Test() {
         "dread", "laded", "taped", "named", "adore", "adorn",
         "agree", "ideas", "ideal", "aimed", "large", "allot",
         "loyal", "float", "talon", "mauls", "blame", "among",
-        "ample", "amply", "range", "tangs", "khans", "baser"
+        "ample", "amply", "range", "tangs", "khans", "baser",
+        "angry", "muser"
       ],
       six_letters: [
         "actors", "remain", "rental", "search", "artist", "asleep",
         "assert", "barely", "subtle", "cellar", "nectar", "crates",
         "sector", "danger", "thread", "deigns", "lasted", "desert",
-        "detail", "detour", "diaper", "stride", "padres", "rusted",
+        "detail", "detour", "paired", "stride", "padres", "rusted",
         "earned", "remote", "envied", "listen", "esprit", "forest",
         "aisled", "mental", "looped", "lemons", "silver", "sparse",
         "master", "mister", "naiver", "plates", "replay", "points",
@@ -71,8 +72,8 @@ export default function Test() {
         "casters", "redhead", "hearsed", "married", "misread", "adverts",
         "arising", "serials", "alcoves", "algeria", "overall", "swallow",
         "allures", "blaming", "anytime", "amherst", "peasant", "wanders",
-        "catches", "grandee", "rangier", "annoyed", "nations", "answers",
-        "anteing"
+        "catches", "grandee", "angrier", "annoyed", "nations", "answers",
+        "anteing", "lankest"
       ],
       eight_letters: [
         "arrogant", "spiracle", "recanted", "counters", "retraced", "resigned",
@@ -109,7 +110,8 @@ export default function Test() {
       },
       eleven_letters: {
         algorithmic: ["logarithmic"],
-        theologians: ["anthologies"]
+        theologians: ["anthologies"],
+        coronavirus: ["carnivorous"]
       },
       thirteen_letters: {
         antiparticles: ["paternalistic"]
@@ -232,11 +234,11 @@ export default function Test() {
         <h1>{displayName}</h1>
         <p>Tries: {tries}</p>
         <p>{noAnagramsLeft ? `Congrats, you win! You beat the game in ${tries} tries.` : `Anagrams left to find: ${possibleAnagrams.length}`}</p>
-        {noAnagramsLeft && <button autoFocus onClick={resetGame}>Play Again?</button>}
+        {noAnagramsLeft && <button autoFocus className={styles.formButton} onClick={resetGame}>Play Again?</button>}
         <p>{noAnagramsLeft ? "" : guessRightOrWrongText}</p>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={noAnagramsLeft} />
-          <button type="submit" disabled={typedGuess.length === 0}>Submit</button>
+        <form onSubmit={handleSubmit} className={styles.formContents}>
+          <input className={styles.formInput} type="text" name="guess" label="guess" value={typedGuess} autoFocus onChange={handleTypedGuessChange} disabled={noAnagramsLeft} />
+          <button className={styles.formButton} type="submit" disabled={typedGuess.length === 0}>Submit</button>
         </form>
         {renderTypedResults(anagramsFound, "Anagrams Found:")}
         {renderTypedResults(incorrectGuesses, "Incorrect Guesses:")}

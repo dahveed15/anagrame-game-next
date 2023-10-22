@@ -13,3 +13,32 @@
   max-width: 300px;
   word-wrap: break-word;
 }
+
+.formContents {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.formInput {
+  /* margin-right: 10px; */
+  border-radius: 6px;
+  font-size: 20px;
+}
+
+.formButton {
+  background: #17202A;
+    color: white;
+    border-style: outset;
+    border-color: #17202A;
+    height: 35px;
+    width: 100px;
+    text-shadow: none;
+    border-radius: 6px;
+}
+
+.formButton:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
